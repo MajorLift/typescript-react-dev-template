@@ -1,0 +1,18 @@
+{
+    // Prettier auto-format
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[json]": {
+        "editor.tabSize": 4,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.quickSuggestions": {
+        "strings": true
+        },
+    },
+    // For Mono-repos
+    "eslint.workingDirectories": []
+  }
+  
