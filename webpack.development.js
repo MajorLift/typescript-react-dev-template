@@ -3,42 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
 
-module.exports = {
-  context: __dirname, // to automatically find tsconfig.json
-  entry: './src/index.tsx',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/',
-  },
+const { merge } = require('webpack-merge')
+const common = require('./webpack.config.js')
+
+module.exports = merge(common, {
   mode: 'development',
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/i,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(s?c|sa)ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif|)$/i,
-        use: 'url-loader',
-      },
-    ],
-  },
   devtool: 'inline-source-map',
   devServer: {
     static: {
@@ -70,4 +39,4 @@ module.exports = {
     }),
     new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
   ],
-}
+})
