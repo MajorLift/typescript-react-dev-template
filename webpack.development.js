@@ -1,18 +1,25 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.tsx'),
+  context: __dirname, // to automatically find tsconfig.json
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/',
   },
   mode: 'development',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/i,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
@@ -20,11 +27,7 @@ module.exports = {
               presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
             },
           },
-          {
-            loader: 'ts-loader',
-          },
         ],
-        exclude: /node_modules/,
       },
       {
         test: /\.(s?c|sa)ss$/i,
@@ -35,9 +38,6 @@ module.exports = {
         use: 'url-loader',
       },
     ],
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -52,7 +52,22 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      inject: true,
       template: path.resolve(__dirname, 'src/index.html'),
     }),
+    new ForkTsCheckerWebpackPlugin({
+      eslint: {
+        files: './src/**/*.{ts,tsx,js,jsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        configFile: './.eslintrc.json',
+      },
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+        mode: 'write-references',
+      },
+    }),
+    new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
   ],
 }
