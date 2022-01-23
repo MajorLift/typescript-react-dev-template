@@ -10,7 +10,7 @@
     /* Project */
     "target": "ESNext", // specify ECMAScript target version
     "module": "ESNext", // specify module code generation
-    "lib": ["DOM"],
+    "lib": ["DOM", "ESNext"],
 
     /* Build */
     "sourceMap": true, // allow sourcemap support

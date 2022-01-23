@@ -43,7 +43,7 @@ const config: WebpackConfig = {
         ],
       },
       {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif|txt|md)$/i,
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)$/i,
         type: 'asset', // replaces {file,raw,url}-loader in webpack 5.
         generator: {
           filename: 'static/[hash][ext][query]',
