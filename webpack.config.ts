@@ -17,6 +17,12 @@ const config: WebpackConfig = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
+    fallback: {
+      // constants: require.resolve('constants-browserify'),
+      // crypto: require.resolve('crypto-browserify'),
+      // path: require.resolve('path-browserify'),
+      // stream: require.resolve('stream-browserify'),
+    },
   },
   module: {
     rules: [
