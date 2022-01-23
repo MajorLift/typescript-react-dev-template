@@ -4,8 +4,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-const isDevMode = process.env.NODE_ENV !== 'production'
 
+const isDevMode = process.env.NODE_ENV !== 'production'
 const config: WebpackConfig = {
   target: 'web',
   context: __dirname,
@@ -28,7 +28,6 @@ const config: WebpackConfig = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
               cacheDirectory: isDevMode,
             },
           },
@@ -57,8 +56,9 @@ const config: WebpackConfig = {
       inject: true,
       template: path.resolve(__dirname, 'src/index.html'),
       hash: true,
-      minify: !isDevMode
-        ? {
+      minify: isDevMode
+        ? null
+        : {
             removeComments: true,
             collapseWhitespace: true,
             removeRedundantAttributes: true,
@@ -69,8 +69,7 @@ const config: WebpackConfig = {
             minifyJS: true,
             minifyCSS: true,
             minifyURLs: true,
-          }
-        : null,
+          },
     }),
     new CspHtmlWebpackPlugin(
       {

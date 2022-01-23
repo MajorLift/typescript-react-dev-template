@@ -8,13 +8,13 @@
     },	
     "env": {	
       "node": true,	
-      "browser": true	
-      // "jest": true	
+      "browser": true,	
+      "jest": true	
     },	
     "plugins": [	
       "@typescript-eslint",	
       "eslint-comments",	
-      // "jest",	
+      "jest",	
       "promise",	
       "unicorn",	
       "prettier"	
@@ -30,7 +30,7 @@
       "plugin:react/recommended",	
       "plugin:react-hooks/recommended",	
       "plugin:eslint-comments/recommended",	
-      // "plugin:jest/recommended",	
+      "plugin:jest/recommended",	
       "plugin:promise/recommended",	
       "plugin:unicorn/recommended",	
       "plugin:prettier/recommended"	
