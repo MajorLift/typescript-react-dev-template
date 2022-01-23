@@ -8,10 +8,10 @@
     "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" NODE_ENV=production webpack --config ./webpack.production.ts",
     "dev": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" NODE_ENV=development webpack-dev-server --config ./webpack.development.ts",
     "compile": "tsc -p ./",
-    "compile:watch": "tsc -watch -p ./",
+    "compile-watch": "tsc --watch -p ./",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test-watch": "jest --watch",
+    "test-coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
