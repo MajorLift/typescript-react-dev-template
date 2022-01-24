@@ -16,7 +16,6 @@
       "eslint-comments",	
       "jest", 
       "promise",	
-      "unicorn",	
       "prettier"	
     ],	
     "extends": [	
@@ -32,7 +31,6 @@
       "plugin:eslint-comments/recommended",	
       "plugin:jest/recommended",	
       "plugin:promise/recommended",	
-      "plugin:unicorn/recommended",	
       "plugin:prettier/recommended"	
     ],	
     "rules": {	
@@ -91,7 +89,7 @@
       // "func-names": "off",	
       // "guard-for-in": "off",	
       // "import/extensions": "off",	
-      "import/no-default-export": "error",	
+      "import/no-default-export": "warn",	
       "import/no-extraneous-dependencies": "off", // It's not accurate in the monorepo style	
       // "import/no-unresolved": "off",	
       "import/prefer-default-export": "off", // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html	
@@ -138,9 +136,6 @@
       // "react/react-in-jsx-scope": "off"	
       "react-hooks/rules-of-hooks": "error",	
       "react-hooks/exhaustive-deps": "warn",	
-  
-      "unicorn/prevent-abbreviations": "off", // Common abbreviations are known and readable	
-      "unicorn/no-array-for-each": "off", // Airbnb prefers forEach	
   
       /**	
        * This is a compatibility ruleset that:	
