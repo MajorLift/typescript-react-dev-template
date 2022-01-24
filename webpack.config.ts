@@ -1,5 +1,5 @@
-import * as path from 'path'
-import { Configuration as WebpackConfig } from 'webpack'
+import path from 'path'
+import { Configuration as WebpackConfig, WebpackPluginInstance } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -63,7 +63,7 @@ const config: WebpackConfig = {
       template: path.resolve(__dirname, 'src/index.html'),
       hash: true,
       minify: isDevMode
-        ? null
+        ? undefined
         : {
             removeComments: true,
             collapseWhitespace: true,
@@ -101,7 +101,7 @@ const config: WebpackConfig = {
         mode: 'write-references', // write-references for babel-loader, write-tsbuildinfo for ts-loader, write-dts for ts-loader with transpile-only flag.
       },
     }),
-  ],
+  ] as WebpackPluginInstance[],
 }
 
 export default config

@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import { Configuration as WebpackConfig } from 'webpack'
 import 'webpack-dev-server'
 import { merge } from 'webpack-merge'

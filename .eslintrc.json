@@ -14,7 +14,7 @@
     "plugins": [	
       "@typescript-eslint",	
       "eslint-comments",	
-      "jest",	
+      "jest", 
       "promise",	
       "unicorn",	
       "prettier"	
