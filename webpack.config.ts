@@ -1,5 +1,5 @@
 import path from 'path'
-import { Configuration as WebpackConfig, WebpackPluginInstance } from 'webpack'
+import { Configuration as WebpackConfig } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -13,6 +13,7 @@ const config: WebpackConfig = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    clean: true,
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -41,15 +42,10 @@ const config: WebpackConfig = {
       },
       {
         test: /\.(sa|s?c)ss$/i,
-        use: [
-          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gifv?)$/i,
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gifv?|webp)$/i,
         type: 'asset', // replaces {file,raw,url}-loader in webpack 5.
         generator: {
           filename: 'static/[hash][ext][query]',
@@ -88,6 +84,7 @@ const config: WebpackConfig = {
         },
       }
     ),
+    new MiniCssExtractPlugin(),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         files: './src/**/*.{ts,tsx,js,jsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
@@ -95,13 +92,14 @@ const config: WebpackConfig = {
       typescript: {
         memoryLimit: 4096,
         diagnosticOptions: {
-          semantic: true,
+          semantic: isDevMode,
           syntactic: true,
         },
         mode: 'write-references', // write-references for babel-loader, write-tsbuildinfo for ts-loader, write-dts for ts-loader with transpile-only flag.
       },
+      async: !isDevMode,
     }),
-  ] as WebpackPluginInstance[],
+  ],
 }
 
 export default config

@@ -2,9 +2,9 @@ import React from 'react'
 
 export const App = (): JSX.Element => {
   return (
-    <div className="App">
+    <div id="App">
       <section>
-        <h2>Hello World!</h2>
+        <div className="text-2xl text-center text-pink-900 m-5 font-bold">Hello World!</div>
       </section>
     </div>
   )

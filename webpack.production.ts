@@ -3,14 +3,12 @@ import { merge } from 'webpack-merge'
 import baseConfig from './webpack.config'
 
 const { ModuleConcatenationPlugin } = WebpackOptimize
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
 const config: WebpackConfig = merge(baseConfig, {
   mode: 'production',
   devtool: 'hidden-source-map',
-  plugins: [new MiniCssExtractPlugin(), new ModuleConcatenationPlugin(), new CleanWebpackPlugin()],
+  plugins: [new ModuleConcatenationPlugin()],
   optimization: {
     minimize: true,
     minimizer: [
