@@ -1,17 +1,26 @@
 {
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
-  "exclude": ["./dist/**/*", "node_modules"],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
   "compilerOptions": {
     /* Paths */
-    "outDir": "./dist",
-    "rootDir": "src",
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-
+    "outDir": "dist",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
     /* Project */
     "target": "ESNext", // specify ECMAScript target version
     "module": "ESNext", // specify module code generation
-    "lib": ["DOM", "ESNext"],
-
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     /* Build */
     "sourceMap": true, // allow sourcemap support
     "jsx": "react", // use typescript to transpile jsx to js
@@ -20,7 +29,6 @@
     "noEmit": true, // Allow Babel to transform files. Set to false to run ts-loader first.
     // "allowJs": true, // allow a partial TypeScript and JavaScript codebase
     // "checkJs": true /* Report errors in .js files. Works with allowJs. */,
-
     /* Module Resolution Options */
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
     "isolatedModules": true /* Transpile each file as a separate module */,
@@ -28,12 +36,10 @@
     "forceConsistentCasingInFileNames": true /* Error out if import and file system have a casing mismatch. Recommended by TS. */,
     "skipLibCheck": true /* Significant perf increase by skipping checking .d.ts files, particularly those in node_modules. Recommended by TS. */,
     "resolveJsonModule": true, // Allow importing .json files
-
     /* Strict Type-Checking Options */
     "strict": true /* enable all strict type-checking options. Implies noImplicitAny, strictNullChecks. */,
     // "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,
     // "strictNullChecks": true /* Enable strict null checks. */,
-
     /* Additional Checks */
     "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
     "noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an override modifier. */,

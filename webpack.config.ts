@@ -1,5 +1,5 @@
 import path from 'path'
-import { Configuration as WebpackConfig } from 'webpack'
+import { Configuration as WebpackConfig, WebpackPluginInstance } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -45,7 +45,7 @@ const config: WebpackConfig = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gifv?|webp)$/i,
+        test: /\.(eot|woff2?|ttf|svg|png|jpe?g|gifv?|webp)$/i,
         type: 'asset', // replaces {file,raw,url}-loader in webpack 5.
         generator: {
           filename: 'static/[hash][ext][query]',
@@ -73,12 +73,14 @@ const config: WebpackConfig = {
             minifyURLs: true,
           },
     }),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     new CspHtmlWebpackPlugin(
       {
         'script-src': ["'self'"],
         'style-src': ["'self'"],
       },
       {
+        hashingMethod: 'sha512',
         hashEnabled: {
           'style-src': isDevMode,
         },
@@ -86,20 +88,38 @@ const config: WebpackConfig = {
     ),
     new MiniCssExtractPlugin(),
     new ForkTsCheckerWebpackPlugin({
-      eslint: {
-        files: './src/**/*.{ts,tsx,js,jsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
-      },
       typescript: {
-        memoryLimit: 4096,
+        mode: 'write-references', // write-references for babel-loader, write-tsbuildinfo for ts-loader, write-dts for ts-loader with transpile-only flag.
         diagnosticOptions: {
           semantic: isDevMode,
           syntactic: true,
         },
-        mode: 'write-references', // write-references for babel-loader, write-tsbuildinfo for ts-loader, write-dts for ts-loader with transpile-only flag.
+        // memoryLimit: 4096,
       },
-      async: !isDevMode,
+      eslint: {
+        files: './src/**/*.{ts,tsx,js,jsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        // memoryLimit: 4096,
+      },
+      issue: {
+        include: {
+          file: './src/**/*',
+        },
+        exclude: [
+          {
+            origin: 'eslint',
+            severity: 'warning', // don't report eslint warnings.
+          },
+          {
+            origin: 'eslint',
+            file: '**/__tests__/**/*', // exclude eslint issues from jest test files.
+          },
+          {
+            file: './*.ts', // exclude config files.
+          },
+        ],
+      },
     }),
-  ],
+  ] as WebpackPluginInstance[],
 }
 
 export default config

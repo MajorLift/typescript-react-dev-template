@@ -5,10 +5,9 @@
   "main": "./dist/bundle.js",
   "scripts": {
     "start": "npm run build && http-server ./dist",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" NODE_ENV=production webpack --config ./webpack.production.ts",
-    "dev": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" NODE_ENV=development webpack-dev-server --config ./webpack.development.ts",
-    "compile": "tsc -p ./",
-    "compile-watch": "tsc --watch -p ./",
+    "build": "npm run format && cross-env TS_NODE_PROJECT=\"tsconfig.root.json\" NODE_ENV=production webpack --config ./webpack.production.ts",
+    "dev": "cross-env TS_NODE_PROJECT=\"tsconfig.root.json\" NODE_ENV=development webpack-dev-server --config ./webpack.development.ts",
+    "format": "prettier --write --config ./.prettierrc .",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage"
@@ -72,7 +71,6 @@
     "mini-css-extract-plugin": "^2.5.2",
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
-    "postcss-preset-env": "^7.2.3",
     "prettier": "^2.5.1",
     "sass": "^1.45.2",
     "sass-loader": "^12.4.0",
@@ -87,7 +85,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
-    "easy-redux-undo": "^1.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
