@@ -48,7 +48,7 @@
     "cross-env": "^7.0.3",
     "csp-html-webpack-plugin": "^5.1.0",
     "css-loader": "^6.5.1",
-    "css-minimizer-webpack-plugin": "^3.4.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
     "eslint": "^8.6.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.3.0",
