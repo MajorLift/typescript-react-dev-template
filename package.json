@@ -70,7 +70,7 @@
     "jsdom-global": "^3.0.2",
     "mini-css-extract-plugin": "^2.5.2",
     "postcss": "^8.4.5",
-    "postcss-loader": "^6.2.1",
+    "postcss-loader": "^7.0.1",
     "prettier": "^2.5.1",
     "sass": "^1.45.2",
     "sass-loader": "^12.4.0",
